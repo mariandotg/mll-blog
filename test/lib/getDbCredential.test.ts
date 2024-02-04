@@ -1,0 +1,15 @@
+import { getDbCredential } from '../../src/lib/getDbCredential';
+
+describe('getDbCredential', () => {
+  it('should return the credential TESTING_DB_NAME', () => {
+    const result = getDbCredential('NAME');
+
+    expect(result).toBe('test_personal_projects');
+  });
+
+  it('should return undefined when credential does not exist', () => {
+    const result = getDbCredential('UNDEFINED_CREDENTIAL');
+
+    expect(result).toBeUndefined();
+  });
+});

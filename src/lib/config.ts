@@ -1,5 +1,5 @@
 import z from 'zod';
-import { getEnvVariable } from './getEnvVariable';
+import { getDbCredential } from './getDbCredential';
 
 const envSchema = z.object({
   NEXTAUTH_SECRET: z.string().min(1),
@@ -14,11 +14,11 @@ const dbCredentialsSchema = z.object({
   port: z.string().min(1),
 });
 
-const DATABASE_HOST = getEnvVariable('HOST');
-const DATABASE_NAME = getEnvVariable('NAME');
-const DATABASE_USERNAME = getEnvVariable('USERNAME');
-const DATABASE_PASSWORD = getEnvVariable('PASSWORD');
-const DATABASE_PORT = Number(getEnvVariable('PORT'));
+const DATABASE_HOST = getDbCredential('HOST');
+const DATABASE_NAME = getDbCredential('NAME');
+const DATABASE_USERNAME = getDbCredential('USERNAME');
+const DATABASE_PASSWORD = getDbCredential('PASSWORD');
+const DATABASE_PORT = Number(getDbCredential('PORT'));
 
 const env = envSchema.parse(process.env);
 
