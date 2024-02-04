@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mll-blog-db:
+    image: mysql:8.0
+    container_name: mll-blog-dev
+    ports:
+      - '3378:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - ./local-db/init.sql:/docker-entrypoint-initdb.d/init.sql
