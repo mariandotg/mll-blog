@@ -1,7 +1,5 @@
+import { ENVIRONMENT } from './config';
 import { getPrefixedEnvVariable } from './getPrefixedEnvVariable';
-
-const { NODE_ENV } = process.env;
-export const ENVIRONMENT = NODE_ENV || 'development';
 
 /**
  * Fetches the environment variable for a given key, with the prefix determined by the current runtime environment (development, test, or production).

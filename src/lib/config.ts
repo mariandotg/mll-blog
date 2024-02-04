@@ -1,5 +1,6 @@
 import z from 'zod';
 import { getDbCredential } from './getDbCredential';
+import { Environment } from '@/models/Environment';
 
 const envSchema = z.object({
   NEXTAUTH_SECRET: z.string().min(1),
@@ -23,6 +24,10 @@ const DATABASE_PORT = Number(getDbCredential('PORT'));
 const DATABASE_URI = `mysql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}/${DATABASE_NAME}?ssl={"rejectUnauthorized":true}`;
 
 const env = envSchema.parse(process.env);
+
+const { NODE_ENV } = process.env;
+
+export const ENVIRONMENT: Environment = NODE_ENV || 'development';
 
 /**
  * Database validated credentials
