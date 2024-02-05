@@ -1,12 +1,18 @@
 import { getDB } from '../../../src/lib/db';
 
 describe('getDB', () => {
-  it('should get the existing DB instance', async () => {
-    // Simula el entorno de producción
+  it('should return the same instance in consecutive calls', async () => {
+    const instance1 = await getDB();
+    const instance2 = await getDB();
 
-    const a = await getDB();
-    console.log(a);
-    // Verifica que la función drizzle se haya llamado con el modo correcto
-    expect(a.config?.mode).toBe('default');
+    expect(instance1).toBe(instance2);
+  });
+
+  it('should return the same instance with a custom environment', async () => {
+    const customEnvironment = 'development';
+    const instance1 = await getDB(customEnvironment);
+    const instance2 = await getDB(customEnvironment);
+
+    expect(instance1).toBe(instance2);
   });
 });
