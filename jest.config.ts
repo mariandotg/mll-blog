@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   collectCoverage: true,
   coverageProvider: 'v8',
   collectCoverageFrom: [
@@ -15,6 +17,7 @@ module.exports = {
     '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
     '^@/components/(.*)$': '<rootDir>/src/components/$1',
+    '^@/lib/(.*)$': '<rootDir>/src/lib/$1',
     '^@/models/(.*)$': '<rootDir>/src/models/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
@@ -28,3 +31,5 @@ module.exports = {
   ],
   setupFilesAfterEnv: ['./jest.setup.js'],
 };
+
+export default config;
