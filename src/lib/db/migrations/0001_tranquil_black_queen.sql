@@ -1,0 +1,1 @@
+ALTER TABLE `mll_blog_articles` ADD `image_url` varchar(255) NOT NULL;

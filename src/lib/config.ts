@@ -2,7 +2,7 @@ import z from 'zod';
 
 const { NODE_ENV } = process.env;
 
-export const ENVIRONMENT = NODE_ENV || 'development';
+export const ENVIRONMENT = NODE_ENV;
 
 const envSchema = z.object({
   NEXTAUTH_SECRET: z.string().min(1),

@@ -8,7 +8,12 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate:generate": "yarn drizzle-kit generate:mysql",
+    "migrate:push": "yarn drizzle-kit push:mysql",
+    "test/migrate:push": "cross-env NODE_ENV=test yarn run migrate:push",
+    "dev/migrate:push": "yarn run migrate:push",
+    "migrate": "yarn run migrate:generate && yarn run test/migrate && yarn run dev/migrate"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.12",
@@ -41,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "babel-jest": "^29.6.2",
+    "cross-env": "^7.0.3",
     "drizzle-kit": "^0.20.6",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
