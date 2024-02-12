@@ -2,7 +2,7 @@
   "name": "mll-blog",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,11 +13,12 @@
     "migrate:push": "yarn drizzle-kit push:mysql",
     "test/migrate:push": "cross-env NODE_ENV=test yarn run migrate:push",
     "dev/migrate:push": "yarn run migrate:push",
-    "migrate": "yarn run migrate:generate && yarn run test/migrate && yarn run dev/migrate"
+    "migrate": "yarn run migrate:generate && yarn run test/migrate:push && yarn run dev/migrate:push"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.12",
     "@hookform/resolvers": "^3.3.3",
+    "@libsql/client": "^0.4.3",
     "@planetscale/database": "^1.11.0",
     "@types/node": "20.4.9",
     "@types/react": "18.2.20",
@@ -31,6 +32,7 @@
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "postcss": "8.4.27",
+    "postgres": "^3.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
