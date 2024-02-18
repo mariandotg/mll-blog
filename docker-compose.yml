@@ -1,22 +1,22 @@
 version: '3.8'
 
 services:
-  mll-blog-dev-db:
-    image: mysql:8.0
-    container_name: mll-blog-dev-db
+  mll-blog-development-db:
+    image: postgres:15.3-alpine3.18
+    container_name: mll-blog-development-db
     ports:
-      - '3378:3306'
+      - '5434:5432'
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    volumes:
-      - ./local-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: personal_projects
+      POSTGRES_USER: root
 
   mll-blog-testing-db:
-    image: mysql:8.0
+    image: postgres:15.3-alpine3.18
     container_name: mll-blog-testing-db
     ports:
-      - '3379:3306'
+      - '5433:5432'
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    volumes:
-      - ./local-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: personal_projects
+      POSTGRES_USER: root
