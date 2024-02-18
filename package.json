@@ -9,8 +9,8 @@
     "start": "next start",
     "test": "jest",
     "lint": "next lint",
-    "migrate:generate": "yarn drizzle-kit generate:mysql",
-    "migrate:push": "yarn drizzle-kit push:mysql",
+    "migrate:generate": "yarn drizzle-kit generate:pg",
+    "migrate:push": "yarn drizzle-kit push:pg",
     "test/migrate:push": "cross-env NODE_ENV=test yarn run migrate:push",
     "dev/migrate:push": "yarn run migrate:push",
     "migrate": "yarn run migrate:generate && yarn run test/migrate:push && yarn run dev/migrate:push"
