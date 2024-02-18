@@ -28,7 +28,7 @@ const DATABASE_NAME = getDbCredential('NAME');
 const DATABASE_USERNAME = getDbCredential('USERNAME');
 const DATABASE_PASSWORD = getDbCredential('PASSWORD');
 const DATABASE_PORT = Number(getDbCredential('PORT'));
-const DATABASE_URI = `mysql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}/${DATABASE_NAME}?ssl={"rejectUnauthorized":true}`;
+const DATABASE_URI = `postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}`;
 
 /**
  * Database validated credentials
