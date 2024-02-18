@@ -2,7 +2,7 @@
   "name": "mll-blog",
   "version": "0.0.1",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,9 +10,8 @@
     "test": "jest",
     "lint": "next lint",
     "migrate:generate": "yarn drizzle-kit generate:pg",
-    "migrate:push": "yarn drizzle-kit push:pg",
-    "test/migrate:push": "cross-env NODE_ENV=test yarn run migrate:push",
-    "dev/migrate:push": "yarn run migrate:push",
+    "dev/migrate:push": "tsx src/lib/db/migrate.ts",
+    "test/migrate:push": "cross-env NODE_ENV=test tsx src/lib/db/migrate.ts",
     "migrate": "yarn run migrate:generate && yarn run test/migrate:push && yarn run dev/migrate:push"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
     "@typescript-eslint/parser": "^5.60.0",
     "babel-jest": "^29.6.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.4.4",
     "drizzle-kit": "^0.20.6",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
@@ -62,7 +62,8 @@
     "jest-environment-jsdom": "^29.6.2",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1"
   },
   "resolutions": {
     "wrap-ansi": "7.0.0",

@@ -14,33 +14,37 @@ const baseConfig: Config = {
 
 const developmentConfig: Config = {
   ...baseConfig,
-  driver: 'mysql2',
+  driver: 'pg',
   dbCredentials: {
-    port,
-    host,
     user: username,
     password,
+    host,
+    port,
     database: name,
   },
 };
 
 const testingConfig: Config = {
   ...baseConfig,
-  driver: 'mysql2',
+  driver: 'pg',
   dbCredentials: {
-    port,
-    host,
     user: username,
     password,
+    host,
+    port,
     database: name,
   },
 };
 
 const productionConfig: Config = {
   ...baseConfig,
-  driver: 'mysql2',
+  driver: 'pg',
   dbCredentials: {
-    uri,
+    user: username,
+    password,
+    host,
+    port,
+    database: name,
   },
   breakpoints: true,
 };
