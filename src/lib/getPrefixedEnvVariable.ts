@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 /**
  * Gets the value of an environment variable by combining a provided prefix and key.
  *
