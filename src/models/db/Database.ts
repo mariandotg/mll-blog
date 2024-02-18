@@ -1,28 +1,58 @@
-import { Connection } from 'mysql2/promise';
-import {
-  MySql2DrizzleConfig,
-  MySql2PreparedQueryHKT,
-  MySql2QueryResultHKT,
-  MySqlDatabase,
-  drizzle,
-} from 'drizzle-orm/mysql2';
 import * as schema from '../../lib/db/schema';
-import { ExtractTablesWithRelations } from 'drizzle-orm';
 import DatabaseConfig from './DatabaseConfig';
+import { DatabaseCredentials } from './DatabaseCredentials';
+import postgres from 'postgres';
+import DatabaseDriver from './DatabaseDriver';
+import { PostgresJsDatabase, drizzle } from 'drizzle-orm/postgres-js';
+import * as fs from 'fs';
+import * as path from 'path';
+
+function isModuleInstalled(moduleName: string) {
+  const nodeModulesPath = path.resolve('node_modules', moduleName);
+  try {
+    fs.accessSync(nodeModulesPath, fs.constants.R_OK);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function isPostgresInstalled() {
+  return isModuleInstalled('postgres');
+}
 
 export class Database {
-  client: Connection;
+  private dbCredentials: DatabaseCredentials;
+  driver: DatabaseDriver;
+  // TODO: Create a generic DatabaseClient class
+  client: postgres.Sql<{}>;
   config: DatabaseConfig;
-  orm: MySqlDatabase<
-    MySql2QueryResultHKT,
-    MySql2PreparedQueryHKT,
-    typeof schema,
-    ExtractTablesWithRelations<typeof schema>
-  >;
+  // TODO: Create a generic DatabaseORM class
+  drizzle: PostgresJsDatabase<typeof schema>;
 
-  constructor(client: Connection, config: DatabaseConfig | undefined) {
-    this.client = client;
+  constructor(
+    driver: DatabaseDriver,
+    config: DatabaseConfig | undefined,
+    dbCredentials: DatabaseCredentials
+  ) {
+    this.dbCredentials = dbCredentials;
+    this.driver = driver;
     this.config = config || { mode: 'default' };
-    this.orm = drizzle(this.client, this.config);
+
+    this.client = this.initializeConnection();
+    this.drizzle = this.initializeDrizzle();
+  }
+
+  // TODO: Create a closeConnection() method
+  private initializeConnection() {
+    if (!isPostgresInstalled()) {
+      throw new Error('Postgres driver not installed (missing postgres)');
+    }
+
+    return postgres(this.dbCredentials.uri, { max: 1 });
+  }
+
+  private initializeDrizzle() {
+    return drizzle(this.client, this.config);
   }
 }
