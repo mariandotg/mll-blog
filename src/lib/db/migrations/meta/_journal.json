@@ -1,19 +1,12 @@
 {
   "version": "5",
-  "dialect": "mysql",
+  "dialect": "pg",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1707167655987,
-      "tag": "0000_absurd_the_liberteens",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1707261344017,
-      "tag": "0001_tranquil_black_queen",
+      "when": 1708230997195,
+      "tag": "0000_fine_rhodey",
       "breakpoints": true
     }
   ]
