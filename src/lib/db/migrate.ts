@@ -1,10 +1,12 @@
-import { migrate as mysqlMigrate } from 'drizzle-orm/mysql2/migrator';
+import { migrate as pgMigrate } from 'drizzle-orm/postgres-js/migrator';
 import { getDB } from '.';
 
 const connectionConfig = {
-  migrationsFolder: './migrations',
+  migrationsFolder: 'src/lib/db/migrations',
 };
 
 const db = await getDB();
 
-await mysqlMigrate(db.orm, connectionConfig);
+await pgMigrate(db.drizzle, connectionConfig);
+
+await db.client.end();
