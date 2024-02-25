@@ -12,6 +12,7 @@
     "migrate:generate": "yarn drizzle-kit generate:pg",
     "dev/migrate:push": "tsx src/lib/db/migrate.ts",
     "test/migrate:push": "cross-env NODE_ENV=test tsx src/lib/db/migrate.ts",
+    "prod/migrate:push": "cross-env NODE_ENV=production tsx src/lib/db/migrate.ts",
     "migrate": "yarn run migrate:generate && yarn run test/migrate:push && yarn run dev/migrate:push"
   },
   "dependencies": {
